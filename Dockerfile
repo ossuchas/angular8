@@ -8,9 +8,6 @@ LABEL author="Suchat Sujalarnlap"
 #WORKDIR /app
 WORKDIR /home/ubuntu/src/app
 
-COPY package.json /home/ubuntu/src/app
-RUN npm install && npm cache clean
-
 COPY . .
 
 # install yarn
@@ -36,7 +33,15 @@ RUN ng build --prod
 
 FROM nginx:alpine
 
-COPY --from=node /home/ubuntu/src/app/dist/angular8 /usr/share/nginx/html
-COPY --from=node /home/ubuntu/src/app/nginx.conf /etc/nginx/conf.d/default.conf
+#COPY --from=node /home/ubuntu/src/app/dist /usr/share/nginx/html
+#COPY --from=node /home/ubuntu/src/app/nginx.conf /etc/nginx/conf.d/default.conf
+
+## Remove default nginx website
+RUN rm -rf /usr/share/nginx/html/*
+## From 'builder' copy website to default nginx public folder
+#COPY --from=builder /home/ubuntu/src/app/dist /usr/share/nginx/html
+COPY --from=node /home/ubuntu/src/app/dist /usr/share/nginx/html
 
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
