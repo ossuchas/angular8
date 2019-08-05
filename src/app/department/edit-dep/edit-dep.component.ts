@@ -12,7 +12,7 @@ export class EditDepComponent implements OnInit {
 
   constructor(
     public dialogbox: MatDialogRef<EditDepComponent>,
-    private service: DepartmentService,
+    public service: DepartmentService,
     private snackBar: MatSnackBar ) { }
 
   ngOnInit() {
