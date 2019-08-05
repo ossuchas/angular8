@@ -52,6 +52,6 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [DepartmentService, EmployeeService],
   bootstrap: [AppComponent],
-  entryComponents: [AddDepComponent, EditDepComponent]
+  entryComponents: [AddDepComponent, EditDepComponent, AddEmpComponent, EditEmpComponent]
 })
 export class AppModule { }
