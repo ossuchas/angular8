@@ -57,7 +57,7 @@ export class ShowEmpComponent implements OnInit {
   onDelete(id: number) {
     console.log(id);
     if (confirm('Are you sure to delete?')) {
-      this.service.deleteDepartment(id).subscribe( res => {
+      this.service.deleteEmployee(id).subscribe( res => {
         this.refreshEmpList();
         this.snackBar.open(res['message'].toString(), '', {
           duration: 5000,

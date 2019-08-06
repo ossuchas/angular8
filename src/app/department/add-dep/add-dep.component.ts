@@ -14,7 +14,8 @@ export class AddDepComponent implements OnInit {
   constructor(
     public dialogbox: MatDialogRef<AddDepComponent>,
     public service: DepartmentService,
-    private snackBar: MatSnackBar ) { }
+    private snackBar: MatSnackBar
+    ) { }
 
   ngOnInit() {
     this.resetForm();

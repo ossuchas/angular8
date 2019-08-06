@@ -24,11 +24,11 @@ export class EmployeeService {
   }
 
   getEmpList(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.APIUrl + '/departments');
+    return this.http.get<Employee[]>(this.APIUrl + '/employees');
   }
 
   // POST
-  addDepartment(data): Observable<Employee> {
+  addEmployee(data): Observable<Employee> {
     return this.http.post<Employee>(this.APIUrl + '/adddepartment', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
@@ -37,8 +37,8 @@ export class EmployeeService {
   }
 
   // PUT
-  updateDepartment(data): Observable<Employee> {
-    return this.http.put<Employee>(this.APIUrl + '/department/' + data.DepartmentID, JSON.stringify(data), this.httpOptions)
+  updateEmployee(data): Observable<Employee> {
+    return this.http.put<Employee>(this.APIUrl + '/department/' + data.EmployeeID, JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -46,7 +46,7 @@ export class EmployeeService {
   }
 
   // Delete
-  deleteDepartment(id: number) {
+  deleteEmployee(id: number) {
     return this.http.delete(this.APIUrl + '/department/' + id, this.httpOptions)
     .pipe(
       retry(1),
@@ -68,7 +68,7 @@ export class EmployeeService {
     return throwError(errorMessage);
  }
 
- private _listeners = new Subject<any>();
+ private _listeners = new Subject<any> ();
  listen(): Observable<any> {
    return this._listeners.asObservable();
  }
