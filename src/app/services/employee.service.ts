@@ -29,7 +29,7 @@ export class EmployeeService {
 
   // POST
   addEmployee(data): Observable<Employee> {
-    return this.http.post<Employee>(this.APIUrl + '/adddepartment', JSON.stringify(data), this.httpOptions)
+    return this.http.post<Employee>(this.APIUrl + '/addemployee', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -38,7 +38,7 @@ export class EmployeeService {
 
   // PUT
   updateEmployee(data): Observable<Employee> {
-    return this.http.put<Employee>(this.APIUrl + '/department/' + data.EmployeeID, JSON.stringify(data), this.httpOptions)
+    return this.http.put<Employee>(this.APIUrl + '/employee/' + data.EmployeeID, JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -47,7 +47,7 @@ export class EmployeeService {
 
   // Delete
   deleteEmployee(id: number) {
-    return this.http.delete(this.APIUrl + '/department/' + id, this.httpOptions)
+    return this.http.delete(this.APIUrl + '/employee/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
