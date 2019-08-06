@@ -18,12 +18,23 @@
     <div class="text-left text-danger" *ngIf="EmployeeName.invalid && EmployeeName.touched">Please Enter Employee
       Name</div>
 
-    <div class="mt-3 input-group">
+    <!-- <div class="mt-3 input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">Department</span>
       </div>
       <input required minlength="2" type="text" class="form-control" name="Department" #Department="ngModel"
         [(ngModel)]="service.formData.Department">
+    </div>
+    <div class="text-left text-danger" *ngIf="Department.invalid && Department.touched">Please Enter Department</div> -->
+
+    <div class="mt-3 input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Department</span>
+      </div>
+      <select required type="text" class="form-control" name="Department" #Department="ngModel"
+        [(ngModel)]="service.formData.Department">
+        <option *ngFor="let dl of listItems" [value]="dl">{{ dl }}</option>
+        </select>
     </div>
     <div class="text-left text-danger" *ngIf="Department.invalid && Department.touched">Please Enter Department</div>
 
@@ -36,12 +47,23 @@
     </div>
     <div class="text-left text-danger" *ngIf="MailID.invalid && MailID.touched">Please Enter Email Address</div>
 
-    <div class="mt-3 input-group">
+    <!-- <div class="mt-3 input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">DOJ</span>
       </div>
       <input required minlength="2" type="text" class="form-control" name="DOJ" #DOJ="ngModel"
         [(ngModel)]="service.formData.DOJ">
+    </div>
+    <div class="text-left text-danger" *ngIf="DOJ.invalid && DOJ.touched">Please Enter Date of Join</div> -->
+
+    <div class="mt-3 input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">DOJ</span>
+      </div>
+      <input required [matDatepicker]="picker" (dateInput)="inputEvent($event)" class="form-control" type="text" name="DOJ" #DOJ="ngModel"
+        [(ngModel)]="service.formData.DOJ">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </div>
     <div class="text-left text-danger" *ngIf="DOJ.invalid && DOJ.touched">Please Enter Date of Join</div>
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Employee } from '../models/employee-model';
+import { Department } from '../models/department-model';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,10 @@ export class EmployeeService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
+ }
+
+ getDepDropDownValues(): Observable<any> {
+   return this.http.get<Department[]>(this.APIUrl + '/departments');
  }
 
  private _listeners = new Subject<any> ();

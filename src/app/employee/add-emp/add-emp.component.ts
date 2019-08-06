@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/employee.service';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/shared/format-datepicker';
 
 @Component({
   selector: 'app-add-emp',
   templateUrl: './add-emp.component.html',
-  styleUrls: ['./add-emp.component.css']
+  styleUrls: ['./add-emp.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class AddEmpComponent implements OnInit {
 
@@ -16,8 +22,21 @@ export class AddEmpComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { }
 
+  public listItems: Array<string> = [];
+  public datepicker: Date = null;
+
   ngOnInit() {
     this.resetForm();
+    this.dropdownRefresh();
+  }
+
+  dropdownRefresh() {
+    this.service.getDepDropDownValues().subscribe(data => {
+      data.forEach(element => {
+       this.listItems.push(element["DepartmentName"]);
+      });
+    });
+
   }
 
   resetForm(form?: NgForm) {
@@ -38,7 +57,16 @@ export class AddEmpComponent implements OnInit {
     this.service.filter('Register click');
   }
 
+  inputEvent(event) {
+    console.log('KAI = ' + event.value);
+    this.datepicker = event.value;
+    // var date = new Date();
+    // console.log(this.datePipe.transform(date,"yyyy-MM-dd"));
+    console.log('Kai2 = ' + this.datepicker);
+  }
+
   onSubmit(form: NgForm) {
+    console.log(form.value);
     this.service.addEmployee(form.value).subscribe(res => {
       this.resetForm(form);
       this.snackBar.open('Add Department Name : ' + res.EmployeeName + '[' + res.EmployeeID + '] Successful..!!' ,
@@ -50,3 +78,4 @@ export class AddEmpComponent implements OnInit {
   }
 
 }
+
