@@ -60,7 +60,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">DOJ</span>
       </div>
-      <input required [matDatepicker]="picker" (dateInput)="inputEvent($event)" class="form-control" type="text" name="DOJ" #DOJ="ngModel"
+      <input required [matDatepicker]="picker" class="form-control" type="text" name="DOJ" #DOJ="ngModel"
         [(ngModel)]="service.formData.DOJ">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

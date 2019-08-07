@@ -57,15 +57,8 @@ export class AddEmpComponent implements OnInit {
     this.service.filter('Register click');
   }
 
-  inputEvent(event) {
-    console.log('KAI = ' + event.value);
-    this.datepicker = event.value;
-    // var date = new Date();
-    // console.log(this.datePipe.transform(date,"yyyy-MM-dd"));
-    console.log('Kai2 = ' + this.datepicker);
-  }
-
   onSubmit(form: NgForm) {
+    form.value.DOJ = this.service.dateConvert(form.value.DOJ);
     console.log(form.value);
     this.service.addEmployee(form.value).subscribe(res => {
       this.resetForm(form);
