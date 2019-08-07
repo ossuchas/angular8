@@ -23,6 +23,8 @@ import { DepartmentService } from './services/department.service';
 import { EmployeeService } from './services/employee.service';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UploadfileComponent } from './uploadfile/uploadfile.component';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { FormsModule } from '@angular/forms';
     DepartmentComponent,
     ShowDepComponent,
     EditDepComponent,
-    AddDepComponent
+    AddDepComponent,
+    UploadfileComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,

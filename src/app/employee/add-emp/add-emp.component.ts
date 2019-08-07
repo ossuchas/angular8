@@ -62,9 +62,9 @@ export class AddEmpComponent implements OnInit {
     console.log(form.value);
     this.service.addEmployee(form.value).subscribe(res => {
       this.resetForm(form);
-      this.snackBar.open('Add Department Name : ' + res.EmployeeName + '[' + res.EmployeeID + '] Successful..!!' ,
+      this.snackBar.open('Add Employy Name : ' + res.EmployeeName + '[' + res.EmployeeID + '] Successful..!!' ,
       '', {
-        duration: 5000,
+        duration: 4000,
         verticalPosition: 'top'
       });
     });
