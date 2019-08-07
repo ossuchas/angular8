@@ -1,5 +1,6 @@
 ##### Stage 1
 
+#FROM node:8.11.4 as node
 FROM node:10.16.0-alpine as node
 
 LABEL author="Suchat Sujalarnlap"
@@ -32,7 +33,15 @@ RUN ng build --prod
 
 FROM nginx:alpine
 
-COPY --from=node /home/ubuntu/src/app/dist/angular8 /usr/share/nginx/html
+#COPY --from=node /home/ubuntu/src/app/dist /usr/share/nginx/html
 #COPY --from=node /home/ubuntu/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+## Remove default nginx website
+RUN rm -rf /usr/share/nginx/html/*
+## From 'builder' copy website to default nginx public folder
+#COPY --from=builder /home/ubuntu/src/app/dist /usr/share/nginx/html
+COPY --from=node /home/ubuntu/src/app/dist /usr/share/nginx/html
+
+EXPOSE 4200
+
+CMD ["nginx", "-g", "daemon off;"]
