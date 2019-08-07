@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {MatTableModule, MatIconModule, MatButtonModule, MatSortModule, MatDialogModule, MatSnackBarModule} from '@angular/material';
+
+import {MatTableModule, MatIconModule, MatButtonModule, MatSortModule, MatDialogModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -22,7 +23,6 @@ import { DepartmentService } from './services/department.service';
 import { EmployeeService } from './services/employee.service';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -48,9 +48,11 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatDialogModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [DepartmentService, EmployeeService],
+  providers: [DepartmentService, EmployeeService, { provide: LOCALE_ID, useValue: "en-US" }],
   bootstrap: [AppComponent],
   entryComponents: [AddDepComponent, EditDepComponent, AddEmpComponent, EditEmpComponent]
 })

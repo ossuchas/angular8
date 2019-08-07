@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, Subject } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Employee } from '../models/employee-model';
+import { Department } from '../models/department-model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class EmployeeService {
   }
 
   // POST
-  addDepartment(data): Observable<Employee> {
-    return this.http.post<Employee>(this.APIUrl + '/adddepartment', JSON.stringify(data), this.httpOptions)
+  addEmployee(data): Observable<Employee> {
+    return this.http.post<Employee>(this.APIUrl + '/addemployee', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -37,8 +38,8 @@ export class EmployeeService {
   }
 
   // PUT
-  updateDepartment(data): Observable<Employee> {
-    return this.http.put<Employee>(this.APIUrl + '/department/' + data.DepartmentID, JSON.stringify(data), this.httpOptions)
+  updateEmployee(data): Observable<Employee> {
+    return this.http.put<Employee>(this.APIUrl + '/employee/' + data.EmployeeID, JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -46,8 +47,8 @@ export class EmployeeService {
   }
 
   // Delete
-  deleteDepartment(id: number) {
-    return this.http.delete(this.APIUrl + '/department/' + id, this.httpOptions)
+  deleteEmployee(id: number) {
+    return this.http.delete(this.APIUrl + '/employee/' + id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -68,7 +69,11 @@ export class EmployeeService {
     return throwError(errorMessage);
  }
 
- private _listeners = new Subject<any>();
+ getDepDropDownValues(): Observable<any> {
+   return this.http.get<Department[]>(this.APIUrl + '/departments');
+ }
+
+ private _listeners = new Subject<any> ();
  listen(): Observable<any> {
    return this._listeners.asObservable();
  }
